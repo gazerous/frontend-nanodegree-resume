@@ -1,4 +1,4 @@
-// ############INPUT VARIABLES BEGIN###############
+// ############OBJECTS BEGIN###############
 var bio = {
     "name" : "Vladimir Korobeynikov",
     "role" : "Web Developer",
@@ -13,80 +13,8 @@ var bio = {
     "skills" : [
         "great" , "does stuff" , "does more stuff", "all the stuff"
     ],
-    "bioPic" : "images/temp.gif"
-};
-
-var education = {
-    "schools": [
-        {
-            "name" : "Random College Name",
-            "location" : "Queens, NY",
-            "degree" : "Some random degree",
-            "majors" : ["schools majors"],
-            "dates" : 2005,
-            "url" : "url to schools webpage"
-        },
-        {
-            "name" : "John Jay College",
-            "location" : "New York, NY",
-            "degree" : "some random degree 2",
-            "majors" : ["schools2 majors"],
-            "dates" : 2010,
-            "url" : "url to schools webpage"
-        }
-    ],
-    "onlineCourses":[
-        {
-            "title" : "Front-End Web Developer",
-            "schools" : "Udacity",
-            "dates" : 2016,
-            "url" : "www.udacity.com/nanodegrees/nd001"
-        },
-        {
-            "title" : "Senior Web Developer",
-            "schools" : "Udacity",
-            "dates" : 2016,
-            "url" : "www.udacity.com/nanodegrees/nd802"
-        }
-    ]
-};
-
-var work = {
-    "jobs": [
-        {
-            "employer" : "Amalg analytics",
-            "title" : "Tech Guy",
-            "dates" : "March 2013 - Present",
-            "location" : "New York, NY",
-            "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce facilisis blandit nisi, a feugiat justo ullamcorper ornare. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ultrices dictum dolor sit amet molestie"
-        },
-        {
-            "employers" : "company 2",
-            "title" : "Tech Dude",
-            "dates" : "April 215 - January 2016",
-            "location" : "Seattle, WA",
-            "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce facilisis blandit nisi, a feugiat justo ullamcorper ornare. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ultrices dictum dolor sit amet molestie"
-        }
-    ]
-};
-
-var projects = {
-    "projects": [
-        {
-        "title" : "Amalgamated Analytics website",
-        "dates" : "2013 - Present",
-        "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce facilisis blandit nisi, a feugiat justo ullamcorper ornare. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ultrices dictum dolor sit amet molestie",
-        "images": [
-            "images/temp.gif", "images/temp.gif"
-                 ]
-        }
-   ]
-};
-//##############INPUT VARIABLES END##########
-
-//###########FUNCTION ENCAPSULATION BEGIN###############
-//###BIO BEGIN
-bio.display = function() {
+    "bioPic" : "images/temp.gif",
+    "display" : function() {
         var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
         $("#header").prepend(formattedRole);
 
@@ -126,95 +54,155 @@ bio.display = function() {
             var formattedSkills = HTMLskills.replace("%data%", bio.skills[skill]);
             $("#header").append(formattedSkills);
         }
-
-};
-//###BIO END
-//###WORK BEGIN
-work.display = function() {
-    for (job in work.jobs) {
-        $("#workExperience").append(HTMLworkStart);
-
-        var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
-
-        var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
-
-        $(".work-entry:last").append(formattedEmployer + formattedTitle); // combines the titles
-
-        var formattedDates = HTMLworkDates.replace("%data%", work.jobs[job].dates);
-        $(".work-entry:last").append(formattedDates);
-
-        var formattedLocation = HTMLworkLocation.replace("%data%", work.jobs[job].location);
-        $(".work-entry:last").append(formattedLocation);
-
-        var formattedDescription = HTMLworkDescription.replace("%data%", work.jobs[job].description);
-        $(".work-entry:last").append(formattedDescription);
     }
 };
-//###WORK END
-//###PROJECTS BEGIN
-projects.display = function() {
-    for (project in projects.projects) {
-        $("#projects").append(HTMLprojectStart);
 
-        var pTitle = HTMLprojectTitle.replace("%data%", projects.projects[project].title);
-        $(".project-entry:last").append(pTitle);
+var education = {
+    "schools": [
+        {
+            "name" : "Random College Name",
+            "location" : "Queens, NY",
+            "degree" : "Some random degree",
+            "majors" : ["schools majors"],
+            "dates" : 2005,
+            "url" : "url to schools webpage"
+        },
+        {
+            "name" : "John Jay College",
+            "location" : "New York, NY",
+            "degree" : "some random degree 2",
+            "majors" : ["schools2 majors"],
+            "dates" : 2010,
+            "url" : "url to schools webpage"
+        }
+    ],
+    "onlineCourses":[
+        {
+            "title" : "Front-End Web Developer",
+            "schools" : "Udacity",
+            "dates" : 2016,
+            "url" : "www.udacity.com/nanodegrees/nd001"
+        },
+        {
+            "title" : "Senior Web Developer",
+            "schools" : "Udacity",
+            "dates" : 2016,
+            "url" : "www.udacity.com/nanodegrees/nd802"
+        }
+    ],
+    "display" : function() {
+        for (school in education.schools) {
+            $("#education").append(HTMLschoolStart);
 
-        var pDates = HTMLprojectDates.replace("%data%", projects.projects[project].dates);
-        $(".project-entry:last").append(pDates);
+            var formattedName = HTMLschoolName.replace("%data%", education.schools[school].name);
 
-        var pDescription = HTMLprojectDescription.replace("%data%", projects.projects[project].description);
-        $(".project-entry:last").append(pDescription);
+            var formattedDegree = HTMLschoolDegree.replace("%data%", education.schools[school].degree);
+            $(".education-entry:last").prepend(formattedName + formattedDegree);
 
-        if (projects.projects[project].images.length > 0) {
-            for (image in projects.projects[project].images) {
-                var pImage = HTMLprojectImage.replace("%data%", projects.projects[project].images[image]);
-                $(".project-entry:last").append(pImage);
+            var formattedDates = HTMLschoolDates.replace("%data%", education.schools[school].dates);
+            $(".education-entry:last").append(formattedDates);
+
+            var formattedLocation = HTMLschoolLocation.replace("%data%", education.schools[school].location);
+            $(".education-entry:last").append(formattedLocation);
+
+            var formattedMajor = HTMLschoolMajor.replace("%data%", education.schools[school].majors);
+            $(".education-entry:last").append(formattedMajor);
+
+        }
+
+        $("#education").append(HTMLonlineClasses);
+
+        for (course in education.onlineCourses){
+            $("#education").append(HTMLschoolStart);
+
+            var formattedTitle = HTMLonlineTitle.replace("%data%", education.onlineCourses[course].title);
+
+            var formattedSchool = HTMLonlineSchool.replace("%data%", education.onlineCourses[course].schools);
+            $(".education-entry:last").append(formattedTitle + formattedSchool);
+
+            var formattedDates = HTMLonlineDates.replace("%data%", education.onlineCourses[course].dates);
+            $(".education-entry:last").append(formattedDates);
+
+            var formattedURL = HTMLonlineURL.replace("%data%", education.onlineCourses[course].url);
+            $(".education-entry:last").append(formattedURL);
+
+        }
+    }
+};
+
+var work = {
+    "jobs": [
+        {
+            "employer" : "Amalg analytics",
+            "title" : "Tech Guy",
+            "dates" : "March 2013 - Present",
+            "location" : "New York, NY",
+            "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce facilisis blandit nisi, a feugiat justo ullamcorper ornare. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ultrices dictum dolor sit amet molestie"
+        },
+        {
+            "employers" : "company 2",
+            "title" : "Tech Dude",
+            "dates" : "April 215 - January 2016",
+            "location" : "Seattle, WA",
+            "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce facilisis blandit nisi, a feugiat justo ullamcorper ornare. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ultrices dictum dolor sit amet molestie"
+        }
+    ],
+    "display" : function() {
+        for (job in work.jobs) {
+            $("#workExperience").append(HTMLworkStart);
+
+            var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
+
+            var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
+
+            $(".work-entry:last").append(formattedEmployer + formattedTitle); // combines the titles
+
+            var formattedDates = HTMLworkDates.replace("%data%", work.jobs[job].dates);
+            $(".work-entry:last").append(formattedDates);
+
+            var formattedLocation = HTMLworkLocation.replace("%data%", work.jobs[job].location);
+            $(".work-entry:last").append(formattedLocation);
+
+            var formattedDescription = HTMLworkDescription.replace("%data%", work.jobs[job].description);
+            $(".work-entry:last").append(formattedDescription);
+        }
+    }
+};
+
+var projects = {
+    "projects": [
+        {
+        "title" : "Amalgamated Analytics website",
+        "dates" : "2013 - Present",
+        "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce facilisis blandit nisi, a feugiat justo ullamcorper ornare. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ultrices dictum dolor sit amet molestie",
+        "images": [
+            "images/temp.gif", "images/temp.gif"
+                 ]
+        }
+   ],
+    "display" : function() {
+        for (project in projects.projects) {
+            $("#projects").append(HTMLprojectStart);
+
+            var pTitle = HTMLprojectTitle.replace("%data%", projects.projects[project].title);
+            $(".project-entry:last").append(pTitle);
+
+            var pDates = HTMLprojectDates.replace("%data%", projects.projects[project].dates);
+            $(".project-entry:last").append(pDates);
+
+            var pDescription = HTMLprojectDescription.replace("%data%", projects.projects[project].description);
+            $(".project-entry:last").append(pDescription);
+
+            if (projects.projects[project].images.length > 0) {
+                for (image in projects.projects[project].images) {
+                    var pImage = HTMLprojectImage.replace("%data%", projects.projects[project].images[image]);
+                    $(".project-entry:last").append(pImage);
+                }
             }
         }
     }
 };
-//###PROJECTS END
-//###EDUCATION BEGIN
-education.display = function() {
-    for (school in education.schools) {
-        $("#education").append(HTMLschoolStart);
-
-        var formattedName = HTMLschoolName.replace("%data%", education.schools[school].name);
-
-        var formattedDegree = HTMLschoolDegree.replace("%data%", education.schools[school].degree);
-        $(".education-entry:last").prepend(formattedName + formattedDegree);
-
-        var formattedDates = HTMLschoolDates.replace("%data%", education.schools[school].dates);
-        $(".education-entry:last").append(formattedDates);
-
-        var formattedLocation = HTMLschoolLocation.replace("%data%", education.schools[school].location);
-        $(".education-entry:last").append(formattedLocation);
-
-        var formattedMajor = HTMLschoolMajor.replace("%data%", education.schools[school].majors);
-        $(".education-entry:last").append(formattedMajor);
-
-    }
-
-    $("#education").append(HTMLonlineClasses);
-
-    for (course in education.onlineCourses){
-        $("#education").append(HTMLschoolStart);
-
-        var formattedTitle = HTMLonlineTitle.replace("%data%", education.onlineCourses[course].title);
-
-        var formattedSchool = HTMLonlineSchool.replace("%data%", education.onlineCourses[course].schools);
-        $(".education-entry:last").append(formattedTitle + formattedSchool);
-
-        var formattedDates = HTMLonlineDates.replace("%data%", education.onlineCourses[course].dates);
-        $(".education-entry:last").append(formattedDates);
-
-        var formattedURL = HTMLonlineURL.replace("%data%", education.onlineCourses[course].url);
-        $(".education-entry:last").append(formattedURL);
-
-    }
-};
-//###EDUCATION END
-//###########FUNCTION ENCAPSULATION ENDS###############
+//##############OBJECTS END##########
 
 // ##########DISPLAY FUNCTIONS BEGIN#####################
 bio.display();
