@@ -1,4 +1,5 @@
 // ############OBJECTS BEGIN###############
+//###BIO B
 var bio = {
     "name" : "Vladimir Korobeynikov",
     "role" : "Web Developer",
@@ -56,7 +57,9 @@ var bio = {
         }
     }
 };
+//###BIO E
 
+//###EDUCATION B
 var education = {
     "schools": [
         {
@@ -129,7 +132,9 @@ var education = {
         }
     }
 };
+//###EDUCATION E
 
+//###WORK B
 var work = {
     "jobs": [
         {
@@ -168,7 +173,9 @@ var work = {
         }
     }
 };
+//###WORK E
 
+//###PROJECTS B
 var projects = {
     "projects": [
         {
@@ -202,6 +209,7 @@ var projects = {
         }
     }
 };
+//###PROJECTS E
 //##############OBJECTS END##########
 
 // ##########DISPLAY FUNCTIONS BEGIN#####################
